@@ -7,6 +7,7 @@ from mopidy.models import Ref, Track
 
 logger = logging.getLogger(__name__)
 
+
 class OE1LibraryProvider(backend.LibraryProvider):
     root_directory = Ref.directory(uri='oe1:directory', name='OE1')
 
@@ -21,11 +22,13 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if(uri == self.root_directory.uri):
             return self._root
 
+        return [Ref.track(uri='oe1:track:foo', name='Foo')]
+
     def find_exact(self, query=None, uris=None):
         return []
 
     def lookup(self, uri):
-        return []
+        return [Track(uri='oe1:track:foo', name='Foo')]
 
     def refresh(self, uri=None):
         pass

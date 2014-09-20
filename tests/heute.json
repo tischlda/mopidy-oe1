@@ -1,0 +1,113 @@
+{
+   "danach" : {
+      "url_detail" : "/programm/382479",
+      "info" : "",
+      "time" : "08:00",
+      "title" : "Morgenjournal (II)"
+   },
+   "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0600_1_2_nachrichten_XXX_w_",
+   "url_playlist" : "/programm/382473/playlist",
+   "link_wma" : "",
+   "nav" : [
+      {
+         "active" : 0,
+         "url" : "/programm/konsole/tag/20140913",
+         "short_label" : "Sa",
+         "day_label" : "Sa., 13.09.2014"
+      },
+      {
+         "active" : 0,
+         "url" : "/programm/konsole/tag/20140914",
+         "short_label" : "So",
+         "day_label" : "So., 14.09.2014"
+      }
+   ],
+   "link_mp3" : "",
+   "list" : [
+      {
+         "info" : "",
+         "time" : "06:00",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0600_1_2_nachrichten_XXX_w_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Nachrichten",
+         "url_detail" : "",
+         "url_json" : "/programm/382473/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "382473",
+         "title" : "Nachrichten",
+         "url_playlist" : "/programm/382473/playlist"
+      },
+      {
+         "info" : "Pr\u00e4sentation: Sibylle Norden\nMusikauswahl: Gerhard Hafner\n\n06:30 Uhr Nachrichten",
+         "time" : "06:05",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0605_4_1_gutenmorgenoesterreich_GMO_m_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Guten Morgen \u00d6sterreich",
+         "url_detail" : "/programm/382474",
+         "url_json" : "/programm/382474/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "382474",
+         "title" : "Guten Morgen \u00d6sterreich",
+         "url_playlist" : "/programm/382474/playlist"
+      },
+      {
+         "info" : "von Herbert Pietschmann, Physiker. \"Die Sch\u00f6pfung und ihre Mechanismen\". Gestaltung: Alexandra Mantler",
+         "time" : "06:56",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0656_5_1_gedankenfuerdentag_GFT_w_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Gedanken f\u00fcr den Tag",
+         "url_detail" : "/programm/383342",
+         "url_json" : "/programm/383342/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "383342",
+         "title" : "Gedanken f\u00fcr den Tag",
+         "url_playlist" : "/programm/383342/playlist"
+      },
+      {
+         "info" : "Ostukraine: Aktionsplan f\u00fcr Frieden- London: Nach der Erleichterung der Streit - Kurz f\u00fcr eine offizielle Koran-Fassung - Bundesheer: Geb\u00e4ude verkommen - \"Wearables\", die Uhr, die alles kann - Ulrich Seidls \"Im Keller\" - Neue \"Zauberfl\u00f6te\" in Salzburg.",
+         "time" : "07:00",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0700_6_2_journal_XXX_w_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Morgenjournal (I)",
+         "url_detail" : "/programm/382476",
+         "url_json" : "/programm/382476/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "382476",
+         "title" : "Morgenjournal (I)",
+         "url_playlist" : "/programm/382476/playlist"
+      },
+      {
+         "info" : "Pr\u00e4sentation: Sibylle Norden\nMusikauswahl: Gerhard Hafner",
+         "time" : "07:33",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0733_4_2_gutenmorgenoesterreich_GMO_m_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Guten Morgen \u00d6sterreich",
+         "url_detail" : "/programm/382477",
+         "url_json" : "/programm/382477/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "382477",
+         "title" : "Guten Morgen \u00d6sterreich",
+         "url_playlist" : "/programm/382477/playlist"
+      },
+      {
+         "info" : "Die \u00d61 Club-Sendung. Aktuelle Veranstaltungen und Angebote der \u00d61 Kulturpartner. Gestaltung: Sibylle Norden",
+         "time" : "07:55",
+         "url_stream" : "http://loopstream01.apa.at/?channel=oe1&id=20140920_0755_30_1_schongehoert_G1H_w_",
+         "day_label" : "20.09.2014",
+         "short_title" : "Schon geh\u00f6rt?",
+         "url_detail" : "/programm/382478",
+         "url_json" : "/programm/382478/konsole",
+         "parts" : [],
+         "tag" : "",
+         "id" : "382478",
+         "title" : "Schon geh\u00f6rt?",
+         "url_playlist" : "/programm/382478/playlist"
+      }
+   ],
+   "day_label" : "Sa., 20.09.2014"
+}
