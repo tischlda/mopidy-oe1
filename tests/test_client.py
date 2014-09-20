@@ -1,13 +1,14 @@
 from __future__ import unicode_literals
 
 import unittest
+import utils
 
 from mopidy_oe1.client import OE1Client
 
 
 class OE1ClientTest(unittest.TestCase):
     def test_get_days(self):
-        oe1 = OE1Client(HttpClientMock())
+        oe1 = OE1Client(utils.HttpClientMock())
 
         days = oe1.get_days()
 
@@ -17,7 +18,7 @@ class OE1ClientTest(unittest.TestCase):
         ])
 
     def test_get_day(self):
-        oe1 = OE1Client(HttpClientMock())
+        oe1 = OE1Client(utils.HttpClientMock())
 
         day = oe1.get_day('20140914')
 
@@ -38,7 +39,7 @@ class OE1ClientTest(unittest.TestCase):
         })
 
     def test_get_item(self):
-        oe1 = OE1Client(HttpClientMock())
+        oe1 = OE1Client(utils.HttpClientMock())
 
         day = oe1.get_item('20140914', '382176')
 
@@ -48,16 +49,3 @@ class OE1ClientTest(unittest.TestCase):
             'time': '06:00',
             'url': 'http://loopstream01.apa.at/?channel=oe1&id=20140914_0600_1_2_nachrichten_XXX_w_'
         })
-
-class HttpClientMock(object):
-    def __init__(self):
-        self.urlMappings = {
-            'http://oe1.orf.at/programm/konsole/heute': 'heute.json',
-            'http://oe1.orf.at/programm/konsole/tag/20140913': 'tag20140913.json',
-            'http://oe1.orf.at/programm/konsole/tag/20140914': 'tag20140914.json'
-        }
-
-    def get(self, url):
-        file_name = 'tests/' + self.urlMappings[url]
-        with open(file_name, 'r') as content_file:
-            return content_file.read()
