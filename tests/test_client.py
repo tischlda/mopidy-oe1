@@ -21,15 +21,40 @@ class OE1ClientTest(unittest.TestCase):
 
         day = oe1.get_day('20140914')
 
-        self.assertEqual(day, {'id': '20140914', 'label': 'So., 14.09.2014'})
+        self.assertEqual(day, {
+            'id': '20140914',
+            'label': 'So., 14.09.2014',
+            'items': [{
+                'id': '382176',
+                'title': 'Nachrichten',
+                'time': '06:00',
+                'url': 'http://loopstream01.apa.at/?channel=oe1&id=20140914_0600_1_2_nachrichten_XXX_w_'
+              }, {
+                'id': '382177',
+                'title': 'Guten Morgen \u00d6sterreich',
+                'time': '06:05',
+                'url': 'http://loopstream01.apa.at/?channel=oe1&id=20140914_0605_4_1_gutenmorgenoesterreich_GMO_m_'
+            }]
+        })
 
+    def test_get_item(self):
+        oe1 = OE1Client(HttpClientMock())
+
+        day = oe1.get_item('20140914', '382176')
+
+        self.assertEqual(day, {
+            'id': '382176',
+            'title': 'Nachrichten',
+            'time': '06:00',
+            'url': 'http://loopstream01.apa.at/?channel=oe1&id=20140914_0600_1_2_nachrichten_XXX_w_'
+        })
 
 class HttpClientMock(object):
     def __init__(self):
         self.urlMappings = {
             'http://oe1.orf.at/programm/konsole/heute': 'heute.json',
-            'http://oe1.orf.at/programm/tag/20140913': 'tag20140913.json',
-            'http://oe1.orf.at/programm/tag/20140914': 'tag20140914.json'
+            'http://oe1.orf.at/programm/konsole/tag/20140913': 'tag20140913.json',
+            'http://oe1.orf.at/programm/konsole/tag/20140914': 'tag20140914.json'
         }
 
     def get(self, url):
