@@ -28,6 +28,10 @@ class OE1LibraryUriTest(unittest.TestCase):
         self.assertEqual(result.uri_type, OE1UriType.ARCHIVE_DAY)
         self.assertEqual(result.day_id, '20140914')
 
+    def test_parse_invalid_uri(self):
+        uri = 'foo:bar'
+        self.assertRaises(TypeError, OE1LibraryUri.parse, uri)
+
     def test_parse_item_uri(self):
         uri = 'oe1:archive:20140914:382176'
         result = OE1LibraryUri.parse(uri)

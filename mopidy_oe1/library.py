@@ -29,19 +29,25 @@ class OE1LibraryProvider(backend.LibraryProvider):
         self.client = client
 
     def browse(self, uri):
-        library_uri = OE1LibraryUri.parse(uri)
-        if library_uri is not None:
-            if library_uri.uri_type == OE1UriType.ROOT:
-                return self.root
+        try:
+            library_uri = OE1LibraryUri.parse(uri)
+        except InvalidOE1Uri, e:
+            logger.error(e)
+            return []
 
-            if library_uri.uri_type == OE1UriType.LIVE:
-                return self.root
+        if library_uri.uri_type == OE1UriType.ROOT:
+            return self.root
 
-            if library_uri.uri_type == OE1UriType.ARCHIVE:
-                return self._browse_archive()
+        if library_uri.uri_type == OE1UriType.LIVE:
+            return self.root
 
-            if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
-                return self._browse_day(library_uri.day_id)
+        if library_uri.uri_type == OE1UriType.ARCHIVE:
+            return self._browse_archive()
+
+        if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
+            return self._browse_day(library_uri.day_id)
+
+        logger.warn('OE1LibraryProvider.browse called with uri that does not support browsing: \'%s\'.' % uri)
         return []
 
     def _browse_archive(self):
@@ -54,13 +60,19 @@ class OE1LibraryProvider(backend.LibraryProvider):
         return []
 
     def lookup(self, uri):
-        library_uri = OE1LibraryUri.parse(uri)
-        if library_uri is not None:
-            if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
-                return self._browse_day(library_uri.day_id)
+        try:
+            library_uri = OE1LibraryUri.parse(uri)
+        except InvalidOE1Uri, e:
+            logger.error(e)
+            return []
 
-            if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
-                return self._lookup_item(library_uri.day_id, library_uri.item_id)
+        if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
+            return self._browse_day(library_uri.day_id)
+
+        if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
+            return self._lookup_item(library_uri.day_id, library_uri.item_id)
+
+        logger.warn('OE1LibraryProvider.lookup called with uri that does not support lookup: \'%s\'.' % uri)
         return []
 
     def _lookup_item(self, day_id, item_id):
@@ -98,6 +110,7 @@ class OE1LibraryUri(object):
                 if matches.group('item_id') is not None:
                     return OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item_id)
                 return OE1LibraryUri(OE1UriType.ARCHIVE_DAY, day_id)
+        raise InvalidOE1Uri(uri);
 
     def __str__(self):
         if self.uri_type == OE1UriType.ROOT: return OE1Uris.ROOT
@@ -105,6 +118,11 @@ class OE1LibraryUri(object):
         if self.uri_type == OE1UriType.ARCHIVE: return OE1Uris.ARCHIVE
         if self.uri_type == OE1UriType.ARCHIVE_DAY: return OE1Uris.ARCHIVE + ':' + self.day_id
         if self.uri_type == OE1UriType.ARCHIVE_ITEM: return OE1Uris.ARCHIVE + ':' + self.day_id + ':' + self.item_id
+
+
+class InvalidOE1Uri(TypeError):
+     def __init__(self, uri):
+         super(TypeError, self).__init__('The URI is not a valid OE1LibraryUri: \'%s\'.' % uri)
 
 
 class OE1UriType(object):

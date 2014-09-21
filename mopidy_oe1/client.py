@@ -9,7 +9,14 @@ logger = logging.getLogger(__name__)
 
 class HttpClient(object):
     def get(self, url):
-        return urllib2.urlopen(url).read()
+        try:
+            response = urllib2.urlopen(url)
+            content = response.read()
+            encoding = response.headers['content-type'].split('charset')[-1]
+            return unicode(content, encoding)
+        except Exception, e:
+            logger.error('Error fetching data from \'%s\': %s', url, e)
+
 
 class OE1Client(object):
     def __init__(self, http_client=HttpClient()):
@@ -41,13 +48,12 @@ class OE1Client(object):
     def _get_json(self, uri):
         try:
             if not uri in self.cache:
-                decoder = json.JSONDecoder()
                 content = self.http_client.get(uri)
+                decoder = json.JSONDecoder()
                 self.cache[uri] = decoder.decode(content)
             return self.cache[uri]
         except Exception, e:
             logger.error('Error decoding content received from \'%s\': %s', uri, e)
-            #logger.debug(content)
 
 
 def _extract_day_id(url):
