@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-import json
+import simplejson
 import logging
 import urllib2
 
@@ -49,7 +49,7 @@ class OE1Client(object):
         try:
             if not uri in self.cache:
                 content = self.http_client.get(uri)
-                decoder = json.JSONDecoder()
+                decoder = simplejson.JSONDecoder()
                 self.cache[uri] = decoder.decode(content)
             return self.cache[uri]
         except Exception, e:
