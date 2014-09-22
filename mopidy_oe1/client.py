@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
 
-import simplejson
+
 import logging
 import urllib2
+
+import simplejson
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +49,7 @@ class OE1Client(object):
 
     def _get_json(self, uri):
         try:
-            if not uri in self.cache:
+            if uri not in self.cache:
                 content = self.http_client.get(uri)
                 decoder = simplejson.JSONDecoder()
                 self.cache[uri] = decoder.decode(content)

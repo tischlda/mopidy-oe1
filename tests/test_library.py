@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 
 import unittest
-import utils
 
-from mopidy_oe1.library import OE1LibraryUri, OE1UriType, OE1LibraryProvider
-from mopidy_oe1.client import OE1Client
+from mopidy_oe1.library import OE1LibraryUri, OE1UriType
+
 
 class OE1LibraryUriTest(unittest.TestCase):
     def test_parse_root_uri(self):

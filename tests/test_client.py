@@ -30,7 +30,7 @@ class OE1ClientTest(unittest.TestCase):
                 'title': 'Nachrichten',
                 'time': '06:00',
                 'url': 'http://loopstream01.apa.at/?channel=oe1&id=20140914_0600_1_2_nachrichten_XXX_w_'
-              }, {
+            }, {
                 'id': '382177',
                 'title': 'Guten Morgen \u00d6sterreich',
                 'time': '06:05',

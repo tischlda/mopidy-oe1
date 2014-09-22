@@ -23,7 +23,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
         Ref.directory(uri=OE1Uris.LIVE, name='Live'),
         Ref.directory(uri=OE1Uris.ARCHIVE, name='7 Tage')]
 
-
     def __init__(self, backend, client=OE1Client()):
         super(OE1LibraryProvider, self).__init__(backend)
         self.client = client
@@ -53,8 +52,13 @@ class OE1LibraryProvider(backend.LibraryProvider):
     def _browse_archive(self):
         return [Ref.directory(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_DAY, day['id'])), name=day['label']) for day in self.client.get_days()]
 
+    def _get_track_title(self, item):
+        return '%s %s' % (item['time'], item['title'])
+
     def _browse_day(self, day_id):
-        return [Ref.track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])), name=item['title']) for item in self.client.get_day(day_id)['items']]
+        return [Ref.track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])),
+                          name=self._get_track_title(item))
+                for item in self.client.get_day(day_id)['items']]
 
     def find_exact(self, query=None, uris=None):
         return []
@@ -77,7 +81,8 @@ class OE1LibraryProvider(backend.LibraryProvider):
 
     def _lookup_item(self, day_id, item_id):
         item = self.client.get_item(day_id, item_id)
-        return [Track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])), name=item['title'])]
+        return [Track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])),
+                      name=self._get_track_title(item))]
 
     def refresh(self, uri=None):
         pass
@@ -89,14 +94,17 @@ class OE1LibraryProvider(backend.LibraryProvider):
 class OE1LibraryUri(object):
     def __init__(self, uri_type, day_id=None, item_id=None):
         self.uri_type = uri_type
-        self.day_id=day_id
-        self.item_id=item_id
+        self.day_id = day_id
+        self.item_id = item_id
 
     @staticmethod
     def parse(uri):
-        if uri == OE1Uris.ROOT: return OE1LibraryUri(OE1UriType.ROOT)
-        if uri == OE1Uris.LIVE: return OE1LibraryUri(OE1UriType.LIVE)
-        if uri == OE1Uris.ARCHIVE: return OE1LibraryUri(OE1UriType.ARCHIVE)
+        if uri == OE1Uris.ROOT:
+            return OE1LibraryUri(OE1UriType.ROOT)
+        if uri == OE1Uris.LIVE:
+            return OE1LibraryUri(OE1UriType.LIVE)
+        if uri == OE1Uris.ARCHIVE:
+            return OE1LibraryUri(OE1UriType.ARCHIVE)
 
         parse_expression = '^' + re.escape(OE1Uris.ARCHIVE) + ':(?P<day_id>\d{8})(:(?P<item_id>\d+))?$'
         parser = re.compile(parse_expression)
@@ -110,19 +118,24 @@ class OE1LibraryUri(object):
                 if matches.group('item_id') is not None:
                     return OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item_id)
                 return OE1LibraryUri(OE1UriType.ARCHIVE_DAY, day_id)
-        raise InvalidOE1Uri(uri);
+        raise InvalidOE1Uri(uri)
 
     def __str__(self):
-        if self.uri_type == OE1UriType.ROOT: return OE1Uris.ROOT
-        if self.uri_type == OE1UriType.LIVE: return OE1Uris.LIVE
-        if self.uri_type == OE1UriType.ARCHIVE: return OE1Uris.ARCHIVE
-        if self.uri_type == OE1UriType.ARCHIVE_DAY: return OE1Uris.ARCHIVE + ':' + self.day_id
-        if self.uri_type == OE1UriType.ARCHIVE_ITEM: return OE1Uris.ARCHIVE + ':' + self.day_id + ':' + self.item_id
+        if self.uri_type == OE1UriType.ROOT:
+            return OE1Uris.ROOT
+        if self.uri_type == OE1UriType.LIVE:
+            return OE1Uris.LIVE
+        if self.uri_type == OE1UriType.ARCHIVE:
+            return OE1Uris.ARCHIVE
+        if self.uri_type == OE1UriType.ARCHIVE_DAY:
+            return OE1Uris.ARCHIVE + ':' + self.day_id
+        if self.uri_type == OE1UriType.ARCHIVE_ITEM:
+            return OE1Uris.ARCHIVE + ':' + self.day_id + ':' + self.item_id
 
 
 class InvalidOE1Uri(TypeError):
-     def __init__(self, uri):
-         super(TypeError, self).__init__('The URI is not a valid OE1LibraryUri: \'%s\'.' % uri)
+    def __init__(self, uri):
+        super(TypeError, self).__init__('The URI is not a valid OE1LibraryUri: \'%s\'.' % uri)
 
 
 class OE1UriType(object):

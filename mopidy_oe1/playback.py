@@ -2,13 +2,13 @@ from __future__ import unicode_literals
 
 import logging
 
-from client import OE1Client
-
 from mopidy import backend
 
+from client import OE1Client
 from mopidy_oe1.library import OE1LibraryUri, OE1UriType
 
 logger = logging.getLogger(__name__)
+
 
 class OE1PlaybackProvider(backend.PlaybackProvider):
     def __init__(self, audio, backend, client=OE1Client()):
