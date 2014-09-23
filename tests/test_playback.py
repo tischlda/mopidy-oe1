@@ -2,17 +2,18 @@ from __future__ import unicode_literals
 
 import unittest
 
-from mopidy.models import Track
-
 from mock import Mock
 
+from mopidy.models import Track
+
 from mopidy_oe1.client import OE1Client
-from mopidy_oe1.playback import OE1PlaybackProvider, OE1LibraryUri, OE1UriType
+from mopidy_oe1.playback import OE1LibraryUri, OE1PlaybackProvider, OE1UriType
 
 
 class OE1LibraryUriTest(unittest.TestCase):
     def test_playback_archive_item(self):
-        library_uri = OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, '20140914', '1234567')
+        library_uri = OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
+                                    '20140914', '1234567')
         track = Track(uri=str(library_uri))
 
         client_mock = Mock()
