@@ -21,22 +21,24 @@ class HttpClient(object):
 
 
 class OE1Client(object):
+    base_uri = 'http://oe1.orf.at'
+    today_uri = base_uri + '/programm/konsole/heute'
+    day_uri = base_uri + '/programm/konsole/tag/%s'
+    LIVE = "http://mp3stream3.apasf.apa.at:8000/listen.pls"
+    CAMPUS = "http://mp3stream4.apasf.apa.at:8000/listen.pls"
+
     def __init__(self, http_client=HttpClient()):
         self.cache = {}
         self.http_client = http_client
-        self.base_uri = 'http://oe1.orf.at'
-        self.entry_point = '/programm/konsole/heute'
 
     def get_days(self):
-        uri = self.base_uri + self.entry_point
-        decoded_content = self._get_json(uri)
+        decoded_content = self._get_json(OE1Client.today_uri)
         if decoded_content is not None:
             return [_extract_day(day) for day in decoded_content['nav']]
         return []
 
     def get_day(self, day_id):
-        decoded_content = self._get_json('%s/programm/konsole/tag/%s'
-                                         % (self.base_uri, day_id))
+        decoded_content = self._get_json(OE1Client.day_uri % day_id)
         if decoded_content is not None:
             return {
                 'id': day_id,

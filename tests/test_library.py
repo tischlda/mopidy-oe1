@@ -16,6 +16,11 @@ class OE1LibraryUriTest(unittest.TestCase):
         result = OE1LibraryUri.parse(uri)
         self.assertEqual(result.uri_type, OE1UriType.LIVE)
 
+    def test_parse_campus_uri(self):
+        uri = 'oe1:campus'
+        result = OE1LibraryUri.parse(uri)
+        self.assertEqual(result.uri_type, OE1UriType.CAMPUS)
+
     def test_parse_archive_uri(self):
         uri = 'oe1:archive'
         result = OE1LibraryUri.parse(uri)
@@ -45,6 +50,10 @@ class OE1LibraryUriTest(unittest.TestCase):
     def test_create_live_uri(self):
         parsed_uri = OE1LibraryUri(OE1UriType.LIVE)
         self.assertEqual(str(parsed_uri), 'oe1:live')
+
+    def test_create_campus_uri(self):
+        parsed_uri = OE1LibraryUri(OE1UriType.CAMPUS)
+        self.assertEqual(str(parsed_uri), 'oe1:campus')
 
     def test_create_archive_uri(self):
         parsed_uri = OE1LibraryUri(OE1UriType.ARCHIVE)

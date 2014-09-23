@@ -14,13 +14,15 @@ logger = logging.getLogger(__name__)
 class OE1Uris(object):
     ROOT = 'oe1:directory'
     LIVE = 'oe1:live'
+    CAMPUS = 'oe1:campus'
     ARCHIVE = 'oe1:archive'
 
 
 class OE1LibraryProvider(backend.LibraryProvider):
     root_directory = Ref.directory(uri=OE1Uris.ROOT, name='OE1')
     root = [
-        Ref.directory(uri=OE1Uris.LIVE, name='Live'),
+        Ref.track(uri=OE1Uris.LIVE, name='Live'),
+        Ref.track(uri=OE1Uris.CAMPUS, name='Campus'),
         Ref.directory(uri=OE1Uris.ARCHIVE, name='7 Tage')]
 
     def __init__(self, backend, client=OE1Client()):
@@ -35,9 +37,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
             return []
 
         if library_uri.uri_type == OE1UriType.ROOT:
-            return self.root
-
-        if library_uri.uri_type == OE1UriType.LIVE:
             return self.root
 
         if library_uri.uri_type == OE1UriType.ARCHIVE:
@@ -74,6 +73,15 @@ class OE1LibraryProvider(backend.LibraryProvider):
         except InvalidOE1Uri, e:
             logger.error(e)
             return []
+
+        if library_uri.uri_type == OE1UriType.LIVE:
+            return [Track(uri=OE1Uris.LIVE, name='Live')]
+
+        if library_uri.uri_type == OE1UriType.CAMPUS:
+            return [Track(uri=OE1Uris.CAMPUS, name='Campus')]
+
+        if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
+            return self._browse_day(library_uri.day_id)
 
         if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
             return self._browse_day(library_uri.day_id)
@@ -114,6 +122,8 @@ class OE1LibraryUri(object):
             return OE1LibraryUri(OE1UriType.ROOT)
         if uri == OE1Uris.LIVE:
             return OE1LibraryUri(OE1UriType.LIVE)
+        if uri == OE1Uris.CAMPUS:
+            return OE1LibraryUri(OE1UriType.CAMPUS)
         if uri == OE1Uris.ARCHIVE:
             return OE1LibraryUri(OE1UriType.ARCHIVE)
 
@@ -135,6 +145,8 @@ class OE1LibraryUri(object):
             return OE1Uris.ROOT
         if self.uri_type == OE1UriType.LIVE:
             return OE1Uris.LIVE
+        if self.uri_type == OE1UriType.CAMPUS:
+            return OE1Uris.CAMPUS
         if self.uri_type == OE1UriType.ARCHIVE:
             return OE1Uris.ARCHIVE
         if self.uri_type == OE1UriType.ARCHIVE_DAY:
@@ -152,6 +164,7 @@ class InvalidOE1Uri(TypeError):
 class OE1UriType(object):
     ROOT = 0
     LIVE = 1
-    ARCHIVE = 2
-    ARCHIVE_DAY = 3
-    ARCHIVE_ITEM = 4
+    CAMPUS = 2
+    ARCHIVE = 3
+    ARCHIVE_DAY = 4
+    ARCHIVE_ITEM = 5
