@@ -55,5 +55,6 @@ class OE1LibraryUriTest(unittest.TestCase):
         self.assertEqual(str(parsed_uri), 'oe1:archive:20140914')
 
     def test_create_item_uri(self):
-        parsed_uri = OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, '20140914', '382176')
+        parsed_uri = OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
+                                   '20140914', '382176')
         self.assertEqual(str(parsed_uri), 'oe1:archive:20140914:382176')

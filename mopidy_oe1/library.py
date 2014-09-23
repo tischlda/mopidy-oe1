@@ -46,17 +46,22 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
             return self._browse_day(library_uri.day_id)
 
-        logger.warn('OE1LibraryProvider.browse called with uri that does not support browsing: \'%s\'.' % uri)
+        logger.warn('OE1LibraryProvider.browse called with uri'
+                    'that does not support browsing: \'%s\'.' % uri)
         return []
 
     def _browse_archive(self):
-        return [Ref.directory(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_DAY, day['id'])), name=day['label']) for day in self.client.get_days()]
+        return [Ref.directory(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_DAY,
+                                                    day['id'])),
+                              name=day['label'])
+                for day in self.client.get_days()]
 
     def _get_track_title(self, item):
         return '%s %s' % (item['time'], item['title'])
 
     def _browse_day(self, day_id):
-        return [Ref.track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])),
+        return [Ref.track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
+                                                day_id, item['id'])),
                           name=self._get_track_title(item))
                 for item in self.client.get_day(day_id)['items']]
 
@@ -76,12 +81,14 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
             return self._lookup_item(library_uri.day_id, library_uri.item_id)
 
-        logger.warn('OE1LibraryProvider.lookup called with uri that does not support lookup: \'%s\'.' % uri)
+        logger.warn('OE1LibraryProvider.lookup called with uri'
+                    'that does not support lookup: \'%s\'.' % uri)
         return []
 
     def _lookup_item(self, day_id, item_id):
         item = self.client.get_item(day_id, item_id)
-        return [Track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item['id'])),
+        return [Track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
+                                            day_id, item['id'])),
                       name=self._get_track_title(item))]
 
     def refresh(self, uri=None):
@@ -97,6 +104,10 @@ class OE1LibraryUri(object):
         self.day_id = day_id
         self.item_id = item_id
 
+    archive_parse_expression = '^' + re.escape(OE1Uris.ARCHIVE) +\
+                               ':(?P<day_id>\d{8})(:(?P<item_id>\d+))?$'
+    archive_parser = re.compile(archive_parse_expression)
+
     @staticmethod
     def parse(uri):
         if uri == OE1Uris.ROOT:
@@ -106,9 +117,7 @@ class OE1LibraryUri(object):
         if uri == OE1Uris.ARCHIVE:
             return OE1LibraryUri(OE1UriType.ARCHIVE)
 
-        parse_expression = '^' + re.escape(OE1Uris.ARCHIVE) + ':(?P<day_id>\d{8})(:(?P<item_id>\d+))?$'
-        parser = re.compile(parse_expression)
-        matches = parser.match(uri)
+        matches = OE1LibraryUri.archive_parser.match(uri)
 
         if matches is not None:
             day_id = matches.group('day_id')
@@ -116,7 +125,8 @@ class OE1LibraryUri(object):
 
             if day_id is not None:
                 if matches.group('item_id') is not None:
-                    return OE1LibraryUri(OE1UriType.ARCHIVE_ITEM, day_id, item_id)
+                    return OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
+                                         day_id, item_id)
                 return OE1LibraryUri(OE1UriType.ARCHIVE_DAY, day_id)
         raise InvalidOE1Uri(uri)
 
@@ -135,7 +145,8 @@ class OE1LibraryUri(object):
 
 class InvalidOE1Uri(TypeError):
     def __init__(self, uri):
-        super(TypeError, self).__init__('The URI is not a valid OE1LibraryUri: \'%s\'.' % uri)
+        super(TypeError, self).__init__(
+            'The URI is not a valid OE1LibraryUri: \'%s\'.' % uri)
 
 
 class OE1UriType(object):

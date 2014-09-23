@@ -17,7 +17,8 @@ class OE1PlaybackProvider(backend.PlaybackProvider):
 
     def change_track(self, track):
         library_uri = OE1LibraryUri.parse(track.uri)
-        if library_uri is None or library_uri.uri_type != OE1UriType.ARCHIVE_ITEM:
+        if library_uri is None or\
+           library_uri.uri_type != OE1UriType.ARCHIVE_ITEM:
             return False
 
         item = self.client.get_item(library_uri.day_id, library_uri.item_id)

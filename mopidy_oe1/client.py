@@ -35,12 +35,14 @@ class OE1Client(object):
         return []
 
     def get_day(self, day_id):
-        decoded_content = self._get_json(self.base_uri + '/programm/konsole/tag/' + day_id)
+        decoded_content = self._get_json('%s/programm/konsole/tag/%s'
+                                         % (self.base_uri, day_id))
         if decoded_content is not None:
             return {
                 'id': day_id,
                 'label': decoded_content['day_label'],
-                'items': [_extract_item(item) for item in decoded_content['list']]
+                'items': [_extract_item(item)
+                          for item in decoded_content['list']]
             }
 
     def get_item(self, day_id, item_id):
@@ -55,7 +57,8 @@ class OE1Client(object):
                 self.cache[uri] = decoder.decode(content)
             return self.cache[uri]
         except Exception, e:
-            logger.error('Error decoding content received from \'%s\': %s', uri, e)
+            logger.error('Error decoding content received from \'%s\': %s',
+                         uri, e)
 
 
 def _extract_day_id(url):
