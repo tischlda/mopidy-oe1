@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import unittest
+
 import utils
 
 from mopidy_oe1.client import OE1Client
