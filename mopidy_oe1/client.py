@@ -28,7 +28,6 @@ class OE1Client(object):
     CAMPUS = "http://mp3stream4.apasf.apa.at:8000/listen.pls"
 
     def __init__(self, http_client=HttpClient()):
-        self.cache = {}
         self.http_client = http_client
 
     def get_days(self):
@@ -53,11 +52,9 @@ class OE1Client(object):
 
     def _get_json(self, uri):
         try:
-            if uri not in self.cache:
-                content = self.http_client.get(uri)
-                decoder = simplejson.JSONDecoder()
-                self.cache[uri] = decoder.decode(content)
-            return self.cache[uri]
+            content = self.http_client.get(uri)
+            decoder = simplejson.JSONDecoder()
+            return decoder.decode(content)
         except Exception, e:
             logger.error('Error decoding content received from \'%s\': %s',
                          uri, e)
