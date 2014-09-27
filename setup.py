@@ -26,6 +26,7 @@ setup(
     install_requires=[
         'setuptools',
         'simplejson',
+        'beaker',
         'Mopidy >= 0.18',
         'Pykka >= 1.1',
     ],

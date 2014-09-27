@@ -100,7 +100,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
                       name=self._get_track_title(item))]
 
     def refresh(self, uri=None):
-        pass
+        self.client.refresh()
 
     def search(self, query=None, uris=None):
         return []
