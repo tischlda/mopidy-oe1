@@ -29,7 +29,7 @@ Project resources
 =================
 
 - `Source code <https://github.com/tischlda/mopidy-oe1>`_
-- `Issue tracker <https://github.com/mopidy/mopidy-soundspot/issues>`_
+- `Issue tracker <https://github.com/tischlda/mopidy-oe1/issues>`_
 
 
 Changelog
