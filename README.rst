@@ -35,7 +35,14 @@ Project resources
 Changelog
 =========
 
+v0.2.0 (UNRELEASED)
+-------------------
+
+- Require Mopidy >= 1.0 (Stein Magnus Jodal)
+- Update to work with changed backend APIs in Mopidy 1.0 (Stein Magnus Jodal)
+- Sort days descending
+
 v0.1.0 (2014-09-27)
 -------------------
 
-- Initial release.
+- Initial release

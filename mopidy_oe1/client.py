@@ -47,7 +47,8 @@ class OE1Client(object):
     def get_days(self):
         decoded_content = self._get_json(OE1Client.today_uri)
         if decoded_content is not None:
-            return [_extract_day(day) for day in decoded_content['nav']]
+            return [_extract_day(day)
+                    for day in reversed(decoded_content['nav'])]
         return []
 
     def get_day(self, day_id):

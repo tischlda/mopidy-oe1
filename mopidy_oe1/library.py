@@ -45,7 +45,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
             return self._browse_day(library_uri.day_id)
 
-        logger.warn('OE1LibraryProvider.browse called with uri'
+        logger.warn('OE1LibraryProvider.browse called with uri '
                     'that does not support browsing: \'%s\'.' % uri)
         return []
 
@@ -63,9 +63,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
                                                 day_id, item['id'])),
                           name=self._get_track_title(item))
                 for item in self.client.get_day(day_id)['items']]
-
-    def find_exact(self, query=None, uris=None):
-        return []
 
     def lookup(self, uri):
         try:
@@ -89,7 +86,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
             return self._lookup_item(library_uri.day_id, library_uri.item_id)
 
-        logger.warn('OE1LibraryProvider.lookup called with uri'
+        logger.warn('OE1LibraryProvider.lookup called with uri '
                     'that does not support lookup: \'%s\'.' % uri)
         return []
 
@@ -101,9 +98,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
 
     def refresh(self, uri=None):
         self.client.refresh()
-
-    def search(self, query=None, uris=None):
-        return []
 
 
 class OE1LibraryUri(object):
