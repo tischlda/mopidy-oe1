@@ -45,7 +45,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
             return self._browse_day(library_uri.day_id)
 
-        logger.warn('OE1LibraryProvider.browse called with uri'
+        logger.warn('OE1LibraryProvider.browse called with uri '
                     'that does not support browsing: \'%s\'.' % uri)
         return []
 
@@ -86,7 +86,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
             return self._lookup_item(library_uri.day_id, library_uri.item_id)
 
-        logger.warn('OE1LibraryProvider.lookup called with uri'
+        logger.warn('OE1LibraryProvider.lookup called with uri '
                     'that does not support lookup: \'%s\'.' % uri)
         return []
 
