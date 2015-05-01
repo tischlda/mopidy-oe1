@@ -27,7 +27,7 @@ setup(
         'setuptools',
         'simplejson',
         'beaker',
-        'Mopidy >= 0.18',
+        'Mopidy >= 1.0',
         'Pykka >= 1.1',
     ],
     test_suite='nose.collector',

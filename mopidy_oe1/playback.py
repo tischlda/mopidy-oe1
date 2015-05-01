@@ -16,26 +16,20 @@ class OE1PlaybackProvider(backend.PlaybackProvider):
         super(OE1PlaybackProvider, self).__init__(audio, backend)
         self.client = client
 
-    def change_track(self, track):
+    def translate_uri(self, uri):
         try:
-            library_uri = OE1LibraryUri.parse(track.uri)
+            library_uri = OE1LibraryUri.parse(uri)
         except InvalidOE1Uri:
-            return False
+            return None
 
         if library_uri.uri_type == OE1UriType.LIVE:
-            track = track.copy(uri=OE1Client.LIVE)
-            return super(OE1PlaybackProvider, self).change_track(track)
+            return OE1Client.LIVE
 
         if library_uri.uri_type == OE1UriType.CAMPUS:
-            track = track.copy(uri=OE1Client.CAMPUS)
-            return super(OE1PlaybackProvider, self).change_track(track)
+            return OE1Client.CAMPUS
 
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
             item = self.client.get_item(library_uri.day_id,
                                         library_uri.item_id)
-            if item is None:
-                return False
-            track = track.copy(uri=item['url'])
-            return super(OE1PlaybackProvider, self).change_track(track)
-
-        return False
+            if item is not None:
+                return item['url']

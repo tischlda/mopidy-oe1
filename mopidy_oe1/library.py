@@ -64,9 +64,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
                           name=self._get_track_title(item))
                 for item in self.client.get_day(day_id)['items']]
 
-    def find_exact(self, query=None, uris=None):
-        return []
-
     def lookup(self, uri):
         try:
             library_uri = OE1LibraryUri.parse(uri)
@@ -101,9 +98,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
 
     def refresh(self, uri=None):
         self.client.refresh()
-
-    def search(self, query=None, uris=None):
-        return []
 
 
 class OE1LibraryUri(object):
