@@ -35,7 +35,7 @@ Project resources
 Changelog
 =========
 
-v0.2.0 (UNRELEASED)
+v1.0.0 (2015-05-01)
 -------------------
 
 - Require Mopidy >= 1.0 (Stein Magnus Jodal)
