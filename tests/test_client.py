@@ -16,8 +16,8 @@ class OE1ClientTest(unittest.TestCase):
         days = self.oe1_client.get_days()
 
         self.assertListEqual(days, [
-            {'id': '20140913', 'label': 'Sa., 13.09.2014'},
-            {'id': '20140914', 'label': 'So., 14.09.2014'}
+            {'id': '20140914', 'label': 'So., 14.09.2014'},
+            {'id': '20140913', 'label': 'Sa., 13.09.2014'}
         ])
 
     def test_get_day(self):
