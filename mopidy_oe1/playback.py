@@ -29,7 +29,5 @@ class OE1PlaybackProvider(backend.PlaybackProvider):
             return OE1Client.CAMPUS
 
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
-            item = self.client.get_item(library_uri.day_id,
+            return self.client.get_item_url(library_uri.day_id,
                                         library_uri.item_id)
-            if item is not None:
-                return item['url']

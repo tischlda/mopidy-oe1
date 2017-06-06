@@ -37,7 +37,7 @@ class HttpClient(object):
 
 class OE1Client(object):
     archive_uri = 'http://audioapi.orf.at/oe1/json/2.0/broadcasts/'
-    record_uri = 'https://audioapi.orf.at/oe1/api/json/current/broadcast/%s/%d'
+    record_uri = 'https://audioapi.orf.at/oe1/api/json/current/broadcast/%s/%s'
     item_uri = 'http://loopstream01.apa.at/?channel=oe1&shoutcast=0&id=%s'
 
     LIVE = "http://mp3stream3.apasf.apa.at:8000/listen.pls"
@@ -61,20 +61,16 @@ class OE1Client(object):
 
     def get_day(self, day_id):
 
-        json = self._get_archive_json()
-        day_rec = next(rec for rec in json if _get_day_id(rec) == day_id)
-
         def to_item(i, rec):
             time = dateutil.parser.parse(rec['startISO'])
-            url = self._get_item_url(rec['programKey'], day_rec['day'])
 
             return {
                 'id': str(i),
                 'time': time.strftime("%H:%M:%S"),
                 'title': rec['title'],
-                'url': url
             }
 
+        day_rec = self._get_day_json(day_id)
         records = day_rec['broadcasts']
 
         return {
@@ -86,6 +82,21 @@ class OE1Client(object):
     def get_item(self, day_id, item_id):
         day = self.get_day(day_id)
         return next(item for item in day['items'] if item['id'] == item_id)
+
+    def get_item_url(self, day_id, item_id):
+        day_rec = self._get_day_json(day_id)
+
+        item_id = int(item_id)
+        item_rec = day_rec['broadcasts'][item_id]
+
+        json = self._get_record_json(item_rec['programKey'], day_id)
+
+        streams = json['streams']
+        if len(streams) == 0:
+            return ""
+
+        streamId = streams[0]['loopStreamId']
+        return OE1Client.item_uri % streamId
 
     def refresh(self):
         self.http_client.refresh()
@@ -102,18 +113,12 @@ class OE1Client(object):
     def _get_archive_json(self):
         return self._get_json(OE1Client.archive_uri)
 
+    def _get_day_json(self, day_id):
+        json = self._get_archive_json()
+        return next(rec for rec in json if _get_day_id(rec) == day_id)
+
     def _get_record_json(self, programKey, day):
         return self._get_json(OE1Client.record_uri % (programKey, day))
-
-    def _get_item_url(self, programKey, day):
-        json = self._get_record_json(programKey, day)
-
-        streams = json['streams']
-        if len(streams) == 0:
-            return ""
-
-        streamId = streams[0]['loopStreamId']
-        return OE1Client.item_uri % streamId
 
 def _get_day_id(day_rec):
     return str(day_rec['day'])
