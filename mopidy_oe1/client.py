@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 import urllib2
+import dateutil.parser
 
 from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
@@ -35,9 +36,10 @@ class HttpClient(object):
 
 
 class OE1Client(object):
-    base_uri = 'http://oe1.orf.at'
-    today_uri = base_uri + '/programm/konsole/heute'
-    day_uri = base_uri + '/programm/konsole/tag/%s'
+    archive_uri = 'http://audioapi.orf.at/oe1/json/2.0/broadcasts/'
+    record_uri = 'https://audioapi.orf.at/oe1/api/json/current/broadcast/%s/%d'
+    item_uri = 'http://loopstream01.apa.at/?channel=oe1&shoutcast=0&id=%s'
+
     LIVE = "http://mp3stream3.apasf.apa.at:8000/listen.pls"
     CAMPUS = "http://mp3stream4.apasf.apa.at:8000/listen.pls"
 
@@ -45,21 +47,41 @@ class OE1Client(object):
         self.http_client = http_client
 
     def get_days(self):
-        decoded_content = self._get_json(OE1Client.today_uri)
-        if decoded_content is not None:
-            return [_extract_day(day)
-                    for day in reversed(decoded_content['nav'])]
+
+        def to_day(rec):
+            return {
+                'id': _get_day_id(rec),
+                'label': _get_day_label(rec)
+            }
+
+        json = self._get_archive_json()
+        if json is not None:
+            return [to_day(rec) for rec in reversed(json)]
         return []
 
     def get_day(self, day_id):
-        decoded_content = self._get_json(OE1Client.day_uri % day_id)
-        if decoded_content is not None:
+
+        json = self._get_archive_json()
+        day_rec = next(rec for rec in json if _get_day_id(rec) == day_id)
+
+        def to_item(i, rec):
+            time = dateutil.parser.parse(rec['startISO'])
+            url = self._get_item_url(rec['programKey'], day_rec['day'])
+
             return {
-                'id': day_id,
-                'label': decoded_content['day_label'],
-                'items': [_extract_item(item)
-                          for item in decoded_content['list']]
+                'id': str(i),
+                'time': time.strftime("%H:%M:%S"),
+                'title': rec['title'],
+                'url': url
             }
+
+        records = day_rec['broadcasts']
+
+        return {
+                'id' : day_id,
+                'label' : _get_day_label(day_rec),
+                'items' : [to_item(i, rec) for i, rec in enumerate(records)]
+        }
 
     def get_item(self, day_id, item_id):
         day = self.get_day(day_id)
@@ -77,22 +99,25 @@ class OE1Client(object):
             logger.error('Error decoding content received from \'%s\': %s',
                          uri, e)
 
+    def _get_archive_json(self):
+        return self._get_json(OE1Client.archive_uri)
 
-def _extract_day_id(url):
-    return url[22:]
+    def _get_record_json(self, programKey, day):
+        return self._get_json(OE1Client.record_uri % (programKey, day))
 
+    def _get_item_url(self, programKey, day):
+        json = self._get_record_json(programKey, day)
 
-def _extract_day(day):
-    return {
-        'id': _extract_day_id(day['url']),
-        'label': day['day_label']
-    }
+        streams = json['streams']
+        if len(streams) == 0:
+            return ""
 
+        streamId = streams[0]['loopStreamId']
+        return OE1Client.item_uri % streamId
 
-def _extract_item(item):
-    return {
-        'id': item['id'],
-        'time': item['time'],
-        'title': item['title'],
-        'url': item['url_stream']
-    }
+def _get_day_id(day_rec):
+    return str(day_rec['day'])
+
+def _get_day_label(day_rec):
+    time = dateutil.parser.parse(day_rec['dateISO'])
+    return time.strftime("%a %d. %b %Y")
