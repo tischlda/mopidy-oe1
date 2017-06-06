@@ -56,7 +56,7 @@ class OE1LibraryProvider(backend.LibraryProvider):
                 for day in self.client.get_days()]
 
     def _get_track_title(self, item):
-        return '%s %s' % (item['time'], item['title'])
+        return '%s: %s' % (item['time'], item['title'])
 
     def _browse_day(self, day_id):
         return [Ref.track(uri=str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
