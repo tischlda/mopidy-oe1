@@ -80,9 +80,6 @@ class OE1LibraryProvider(backend.LibraryProvider):
         if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
             return self._browse_day(library_uri.day_id)
 
-        if library_uri.uri_type == OE1UriType.ARCHIVE_DAY:
-            return self._browse_day(library_uri.day_id)
-
         if library_uri.uri_type == OE1UriType.ARCHIVE_ITEM:
             return self._lookup_item(library_uri.day_id, library_uri.item_id)
 
