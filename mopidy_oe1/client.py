@@ -3,10 +3,11 @@ from __future__ import unicode_literals
 
 import logging
 import urllib2
-import dateutil.parser
 
 from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
+
+import dateutil.parser
 
 import simplejson
 
@@ -74,9 +75,9 @@ class OE1Client(object):
         records = day_rec['broadcasts']
 
         return {
-                'id' : day_id,
-                'label' : _get_day_label(day_rec),
-                'items' : [to_item(i, rec) for i, rec in enumerate(records)]
+                'id': day_id,
+                'label': _get_day_label(day_rec),
+                'items': [to_item(i, rec) for i, rec in enumerate(records)]
         }
 
     def get_item(self, day_id, item_id):
@@ -120,8 +121,10 @@ class OE1Client(object):
     def _get_record_json(self, programKey, day):
         return self._get_json(OE1Client.record_uri % (programKey, day))
 
+
 def _get_day_id(day_rec):
     return str(day_rec['day'])
+
 
 def _get_day_label(day_rec):
     time = dateutil.parser.parse(day_rec['dateISO'])
