@@ -41,8 +41,8 @@ class OE1Client(object):
     record_uri = 'https://audioapi.orf.at/oe1/api/json/current/broadcast/%s/%s'
     item_uri = 'http://loopstream01.apa.at/?channel=oe1&shoutcast=0&id=%s'
 
-    LIVE = "http://mp3stream3.apasf.apa.at:8000/listen.pls"
-    CAMPUS = "http://mp3stream4.apasf.apa.at:8000/listen.pls"
+    LIVE = "http://mp3stream3.apasf.apa.at:8000/"
+    CAMPUS = "http://mp3stream4.apasf.apa.at:8000/"
 
     def __init__(self, http_client=HttpClient()):
         self.http_client = http_client
