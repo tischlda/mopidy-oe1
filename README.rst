@@ -35,11 +35,15 @@ Project resources
 Changelog
 =========
 
+v1.1.0 (2017-06-11)
+-------------------
+- Updated to new OE1 JSON API (Stefan Huber `shuber2 <https://github.com/shuber2>`_)
+
 v1.0.0 (2015-05-01)
 -------------------
 
-- Require Mopidy >= 1.0 (Stein Magnus Jodal)
-- Update to work with changed backend APIs in Mopidy 1.0 (Stein Magnus Jodal)
+- Require Mopidy >= 1.0 (Stein Magnus Jodal `jodal <https://github.com/jodal>`_)
+- Update to work with changed backend APIs in Mopidy 1.0 (Stein Magnus Jodal `jodal <https://github.com/jodal>`_)
 - Sort days descending
 
 v0.1.0 (2014-09-27)
