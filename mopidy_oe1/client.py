@@ -72,12 +72,14 @@ class OE1Client(object):
             }
 
         day_rec = self._get_day_json(day_id)
-        records = day_rec['broadcasts']
+        items = [to_item(i, broadcast_rec)
+                 for i, broadcast_rec in enumerate(day_rec['broadcasts'])
+                 if broadcast_rec['isBroadcasted']]
 
         return {
                 'id': day_id,
                 'label': _get_day_label(day_rec),
-                'items': [to_item(i, rec) for i, rec in enumerate(records)]
+                'items': items
         }
 
     def get_item(self, day_id, item_id):

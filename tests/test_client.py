@@ -30,10 +30,6 @@ class OE1ClientTest(unittest.TestCase):
                 'id': '0',
                 'title': 'Nachrichten',
                 'time': '10:59:49'
-            }, {
-                'id': '1',
-                'title': 'Matinee',
-                'time': '11:02:57'
             }]
         })
 
