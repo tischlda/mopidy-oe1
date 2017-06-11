@@ -26,6 +26,7 @@ setup(
     install_requires=[
         'setuptools',
         'simplejson',
+        'python-dateutil',
         'beaker',
         'Mopidy >= 1.0',
         'Pykka >= 1.1',
