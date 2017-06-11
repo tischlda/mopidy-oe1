@@ -35,6 +35,10 @@ Project resources
 Changelog
 =========
 
+v1.2.0 (2017-06-11)
+-------------------
+- Update live stream URLs
+
 v1.1.0 (2017-06-11)
 -------------------
 - Updated to new OE1 JSON API (Stefan Huber `shuber2 <https://github.com/shuber2>`_)
