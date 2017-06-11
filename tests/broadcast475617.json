@@ -1,0 +1,111 @@
+{
+  "href": "https://audioapi.orf.at/oe1/api/json/current/broadcast/475617/20170604",
+  "station": "oe1",
+  "entity": "Broadcast",
+  "id": 34614,
+  "broadcastDay": 20170604,
+  "programKey": "475617",
+  "program": "1",
+  "title": "Nachrichten",
+  "subtitle": null,
+  "ressort": "journale",
+  "state": "C",
+  "isOnDemand": true,
+  "isGeoProtected": false,
+  "start": 1496566789000,
+  "startISO": "2017-06-04T10:59:49+02:00",
+  "startOffset": -7200000,
+  "scheduledStart": 1496566800000,
+  "scheduledStartISO": "2017-06-04T11:00:00+02:00",
+  "scheduledStartOffset": -7200000,
+  "end": 1496566977000,
+  "endISO": "2017-06-04T11:02:57+02:00",
+  "endOffset": -7200000,
+  "scheduledEnd": 1496566980000,
+  "scheduledEndISO": "2017-06-04T11:03:00+02:00",
+  "scheduledEndOffset": -7200000,
+  "niceTime": 1496566800000,
+  "niceTimeISO": "2017-06-04T11:00:00+02:00",
+  "niceTimeOffset": -7200000,
+  "description": null,
+  "pressRelease": null,
+  "akm": "",
+  "tags": [],
+  "moderator": null,
+  "url": "http://oe1.orf.at/nachrichten",
+  "images": [
+    {
+      "category": "imgprog",
+      "copyright": "ORF",
+      "versions": [
+        {
+          "width": 1750,
+          "hashCode": 473087052,
+          "path": "http://oe1.orf.at/i/header_retina/r/journale.png"
+        },
+        {
+          "width": 875,
+          "hashCode": 907706401,
+          "path": "http://oe1.orf.at/i/header/r/journale.png"
+        }
+      ],
+      "text": "Ö1 journale",
+      "hashCode": 708324353,
+      "mode": "external",
+      "alt": "Radiothek journale"
+    }
+  ],
+  "items": [
+    {
+      "station": "oe1",
+      "entity": "BroadcastItem",
+      "id": 499422,
+      "broadcastDay": 20170604,
+      "programKey": "475617",
+      "program": "1",
+      "type": "N",
+      "description": null,
+      "state": "C",
+      "isOnDemand": true,
+      "isGeoProtected": false,
+      "isCompleted": true,
+      "duration": null,
+      "title": "Nachrichten",
+      "subtitle": null,
+      "moderator": null,
+      "start": 1496566789000,
+      "startISO": "2017-06-04T10:59:49+02:00",
+      "startOffset": -7200000,
+      "end": 1496566977000,
+      "endISO": "2017-06-04T11:02:57+02:00",
+      "endOffset": -7200000
+    }
+  ],
+  "streams": [
+    {
+      "alias": "7DaysSun13",
+      "title": null,
+      "loopStreamId": "2017-06-04_1059_tl_51_7DaysSun13_377761.mp3",
+      "start": 1496566789000,
+      "startISO": "2017-06-04T10:59:49+02:00",
+      "startOffset": -7200000,
+      "end": 1496566977000,
+      "endISO": "2017-06-04T11:02:57+02:00",
+      "endOffset": -7200000
+    }
+  ],
+  "marks": [
+    {
+      "type": "in",
+      "timestamp": 1496566789000,
+      "timestampISO": "2017-06-04T10:59:49+02:00",
+      "timestampOffset": -7200000
+    },
+    {
+      "type": "out",
+      "timestamp": 1496566977000,
+      "timestampISO": "2017-06-04T11:02:57+02:00",
+      "timestampOffset": -7200000
+    }
+  ]
+}

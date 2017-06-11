@@ -1,0 +1,82 @@
+[
+  {
+    "day": 20170604,
+    "date": 1496548800000,
+    "dateISO": "2017-06-04T06:00:00+02:00",
+    "dateOffset": -7200000,
+    "broadcasts": [
+      {
+        "programKey": "475617",
+        "title": "Nachrichten",
+        "subtitle": null,
+        "description": null,
+        "isPublic": true,
+        "isBroadcasted": true,
+        "start": 1496566789000,
+        "scheduled": 1496566800000,
+        "scheduledOffset": -7200000,
+        "startISO": "2017-06-04T10:59:49+02:00",
+        "startOffset": -7200000,
+        "end": 1496566977000,
+        "endISO": "2017-06-04T11:02:57+02:00",
+        "endOffset": -7200000
+      },
+      {
+        "programKey": "475618",
+        "title": "Matinee",
+        "subtitle": "<p>In memoriam Jiri Belohlávek. Symphonieorchester des Bayerischen Rundfunks, Dirigent: Jiri Belohlávek; Magdalena Kozená, Mezzosopran. Bohuslav Martinu: Serenade Nr. 2 (Fassung für Kammerorchester) * Leos Janácek: Suite aus der Oper \"Die Ausflüge des Herrn Broucek\" (Auswahl, Zusammenstellung und Bearbeitung von Jaroslav Smolka) * Antonin Dvorák: \"Biblische Lieder\" für Singstimme und Orchester op. 99 * L. Janácek: \"Taras Bulba\", Rhapsodie für Orchester (aufgenommen am 28. April in der Philharmonie im Gasteig München). Präsentation: Aimie Rehburg.</p>",
+        "description": "<p>Jiri Belohlavek war eine der markantesten Persönlichkeiten unter den tschechischen Dirigenten. Kein Geringerer als Sergiu Celibidache hat seine Begabung früh erkannt und ihn 1968 zu seinem Assistenten gemacht. Belohlavek war eng vertraut mit den Werken der bedeutenden Komponisten seiner Heimat. Seine Smetana- oder Dvorak-Interpretationen setzten bald Maßstäbe. Früh hat er sich aber auch schon für Leos Janacek oder Bohuslav Martinu eingesetzt, hat viele ihrer Stücke im In- und Ausland dirigiert und wesentlich dazu beigetragen, dass diese heute zum internationalen Repertoire gehören. </p><p>Belohlaveks Karriere begann 1972, als er Chefdirigent der Staatsphilharmonie Brünn wurde. Von dort ging es dann in seine Heimatstadt Prag, zunächst zu den Prager Symphonikern, dann zur Tschechischen Philharmonie und zur Prager Kammerphilharmonie, die er selbst gegründet hat. 2006 ernannte man ihn zum Chefdirigenten des BBC Symphony Orchestra London. Er wurde dort mit dem Titel eines \"Ehrendirigenten\" ausgezeichnet. </p><p>2012 kehrte er zur Tschechischen Philharmonie zurück. Bis 2022 hätte sein Vertrag gegolten, hätte ihn nicht eine schwere Krankheit aus seinem künstlerischen Leben gerissen. Jiri Belohlavek war ein beliebter Gastdirigent in vielen Musikzentren der Welt und reüssierte sowohl im Konzert als auch in der Oper. </p><p>Die internationale Musikwelt trauert um einen ihrer ganz großen Künstler.</p><p><strong>Mehr</strong> dazu in <a href=\"http://oe1.orf.at/artikel/634142\">oe1.ORF.at</a></p><p><a href=\"http://oe1.orf.at/player/20170604/475620\">Matinee II</a></p>",
+        "isPublic": true,
+        "isBroadcasted": true,
+        "start": 1496566977000,
+        "scheduled": 1496566980000,
+        "scheduledOffset": -7200000,
+        "startISO": "2017-06-04T11:02:57+02:00",
+        "startOffset": -7200000,
+        "end": 1496569139000,
+        "endISO": "2017-06-04T11:38:59+02:00",
+        "endOffset": -7200000
+      }
+    ]
+  },
+  {
+    "day": 20170605,
+    "date": 1496631600000,
+    "dateISO": "2017-06-05T05:00:00+02:00",
+    "dateOffset": -7200000,
+    "broadcasts": [
+      {
+        "programKey": "475649",
+        "title": "Nachrichten",
+        "subtitle": null,
+        "description": null,
+        "isPublic": true,
+        "isBroadcasted": true,
+        "start": 1496635187000,
+        "scheduled": 1496635200000,
+        "scheduledOffset": -7200000,
+        "startISO": "2017-06-05T05:59:47+02:00",
+        "startOffset": -7200000,
+        "end": 1496635498000,
+        "endISO": "2017-06-05T06:04:58+02:00",
+        "endOffset": -7200000
+      },
+      {
+        "programKey": "475650",
+        "title": "Guten Morgen Österreich",
+        "subtitle": "<p>Präsentation: Andreas Maurer<br/>Musikauswahl: Gerhard Hafner </p><p>06:30 Uhr Nachrichten</p>",
+        "description": null,
+        "isPublic": true,
+        "isBroadcasted": true,
+        "start": 1496635498000,
+        "scheduled": 1496635500000,
+        "scheduledOffset": -7200000,
+        "startISO": "2017-06-05T06:04:58+02:00",
+        "startOffset": -7200000,
+        "end": 1496638786000,
+        "endISO": "2017-06-05T06:59:46+02:00",
+        "endOffset": -7200000
+      }
+    ]
+  }
+]

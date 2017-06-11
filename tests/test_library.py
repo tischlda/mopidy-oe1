@@ -127,7 +127,7 @@ class OE1LibraryProviderTest(unittest.TestCase):
         self.assertEqual(len(result), 3)
         self.assertEqual(result[0].type, Ref.TRACK)
         self.assertEqual(result[0].uri, 'oe1:archive:20140914:1')
-        self.assertEqual(result[0].name, '01:00 Item1')
+        self.assertEqual(result[0].name, '01:00: Item1')
 
     def test_lookup_invalid_uri(self):
         uri = 'foo:bar'
@@ -160,7 +160,7 @@ class OE1LibraryProviderTest(unittest.TestCase):
         self.assertEqual(len(result), 3)
         self.assertEqual(result[0].type, Ref.TRACK)
         self.assertEqual(result[0].uri, 'oe1:archive:20140914:1')
-        self.assertEqual(result[0].name, '01:00 Item1')
+        self.assertEqual(result[0].name, '01:00: Item1')
 
     def test_lookup_archive_item(self):
         uri = str(OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
@@ -170,4 +170,4 @@ class OE1LibraryProviderTest(unittest.TestCase):
             '20140914', '1234567')
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0].uri, 'oe1:archive:20140914:1')
-        self.assertEqual(result[0].name, '01:00 Item1')
+        self.assertEqual(result[0].name, '01:00: Item1')

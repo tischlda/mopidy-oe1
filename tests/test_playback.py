@@ -13,7 +13,7 @@ class OE1LibraryUriTest(unittest.TestCase):
         library_uri = OE1LibraryUri(OE1UriType.ARCHIVE_ITEM,
                                     '20140914', '1234567')
         client_mock = Mock()
-        client_mock.get_item = Mock(return_value={'url': 'result_uri'})
+        client_mock.get_item_url = Mock(return_value='result_uri')
         playback = OE1PlaybackProvider(None, None, client=client_mock)
 
         result = playback.translate_uri(str(library_uri))

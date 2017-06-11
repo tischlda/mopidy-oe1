@@ -4,15 +4,13 @@ from __future__ import unicode_literals
 class HttpClientMock(object):
     def __init__(self):
         self.urlMappings = {
-            'http://oe1.orf.at/programm/konsole/heute':
-                'heute.json',
-            'http://oe1.orf.at/programm/konsole/tag/20140913':
-                'tag20140913.json',
-            'http://oe1.orf.at/programm/konsole/tag/20140914':
-                'tag20140914.json'
+            'http://audioapi.orf.at/oe1/json/2.0/broadcasts/':
+                'broadcasts.json',
+            'https://audioapi.orf.at/oe1/api/json/current/broadcast/475617':
+                'broadcast475617.json'
         }
 
     def get(self, url):
-        file_name = 'tests/' + self.urlMappings[url]
+        file_name = self.urlMappings[url]
         with open(file_name, 'r') as content_file:
             return content_file.read()

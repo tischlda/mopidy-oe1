@@ -16,38 +16,32 @@ class OE1ClientTest(unittest.TestCase):
         days = self.oe1_client.get_days()
 
         self.assertListEqual(days, [
-            {'id': '20140914', 'label': 'So., 14.09.2014'},
-            {'id': '20140913', 'label': 'Sa., 13.09.2014'}
+            {'id': '20170605', 'label': 'Mon 05. Jun 2017'},
+            {'id': '20170604', 'label': 'Sun 04. Jun 2017'}
         ])
 
     def test_get_day(self):
-        day = self.oe1_client.get_day('20140914')
+        day = self.oe1_client.get_day('20170604')
 
         self.assertEqual(day, {
-            'id': '20140914',
-            'label': 'So., 14.09.2014',
+            'id': '20170604',
+            'label': 'Sun 04. Jun 2017',
             'items': [{
-                'id': '382176',
+                'id': '0',
                 'title': 'Nachrichten',
-                'time': '06:00',
-                'url': 'http://loopstream01.apa.at/?channel=oe1'
-                       '&id=20140914_0600_1_2_nachrichten_XXX_w_'
+                'time': '10:59:49'
             }, {
-                'id': '382177',
-                'title': 'Guten Morgen \u00d6sterreich',
-                'time': '06:05',
-                'url': 'http://loopstream01.apa.at/?channel=oe1'
-                       '&id=20140914_0605_4_1_gutenmorgenoesterreich_GMO_m_'
+                'id': '1',
+                'title': 'Matinee',
+                'time': '11:02:57'
             }]
         })
 
     def test_get_item(self):
-        day = self.oe1_client.get_item('20140914', '382176')
+        day = self.oe1_client.get_item('20170604', '0')
 
         self.assertEqual(day, {
-            'id': '382176',
+            'id': '0',
             'title': 'Nachrichten',
-            'time': '06:00',
-            'url': 'http://loopstream01.apa.at/?channel=oe1'
-                   '&id=20140914_0600_1_2_nachrichten_XXX_w_'
+            'time': '10:59:49'
         })
